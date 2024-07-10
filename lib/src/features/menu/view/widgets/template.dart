@@ -12,11 +12,11 @@ class CategorySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start, // выравнивает по началу горизонтальной оси
+      mainAxisSize: MainAxisSize.min, // будет иметь высоту, равную сумме дочерних виджетов
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          padding: const EdgeInsets.symmetric(vertical: 16.0), // отступы по вертикали
           child: Text(
             category.categoryName,
             style: Theme.of(context).textTheme.titleLarge,
@@ -26,14 +26,14 @@ class CategorySection extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 14.0,
-            crossAxisSpacing: 14.0,
-            mainAxisExtent: 200,
+            crossAxisCount: 2, // кол-во столбцов
+            mainAxisSpacing: 14.0, // вертикальный отступ м-у элементами
+            crossAxisSpacing: 14.0, // горизонтальный отступ м-у элементами
+            mainAxisExtent: 200, // высота для элементов сетки
           ),
-          itemCount: category.items.length,
-          itemBuilder: (context, index) {
-            return MenuItemCard(item: category.items[index]);
+          itemCount: category.items.length, // кол-во элементо в сетке
+          itemBuilder: (context, index) { 
+            return MenuItemCard(item: category.items[index]); // возвращает элемент меню
           },
         ),
       ],
@@ -51,14 +51,14 @@ class MenuItemCard extends StatefulWidget {
 }
 
 class _ItemCardState extends State<MenuItemCard> {
-  int _quantity = 0;
+  int _quantity = 0; // кол-во выбранных элементов
 
-  bool get showQuantityButtons => _quantity > 0;
+  bool get showQuantityButtons => _quantity > 0; // true при выбранном кол-ве товара
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 150,
+      width: 150, // контейнер фиксированного размера
       child: Card(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
@@ -66,7 +66,7 @@ class _ItemCardState extends State<MenuItemCard> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4),
-                child: ConstrainedBox(
+                child: ConstrainedBox( // ограничивает размер изображения
                   constraints: const BoxConstraints(maxHeight: 100),
                   child: widget.item.imagePath != null
                       ? Image.network(widget.item.imagePath!)
@@ -82,13 +82,13 @@ class _ItemCardState extends State<MenuItemCard> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4),
-                child: SizedBox(
+                child: SizedBox( 
                   height: 24,
                   child: showQuantityButtons
                       ? Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
+                          mainAxisSize: MainAxisSize.max, // Занимает максимум доступного пространства по горизонтали.
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween, // Равномерно распределяет элементы по всей ширине строки.
+                          children: [ // Кнопка уменьшения количества
                             SizedBox(width: 24, child: Ink(
                                 decoration: const ShapeDecoration(
                                   shape: CircleBorder(), color: AppColors.button),
@@ -103,7 +103,7 @@ class _ItemCardState extends State<MenuItemCard> {
                                 ),
                               ),
                             ),
-                            Expanded(
+                            Expanded( // Текущие количество
                               child: Padding(
                                 padding: MediaQuery.sizeOf(context).width > 100
                                     ? const EdgeInsets.symmetric(horizontal: 8)
@@ -124,7 +124,7 @@ class _ItemCardState extends State<MenuItemCard> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            SizedBox( // Кнопка увеличения количества
                               width: 24,
                               child: Ink(
                                 decoration: const ShapeDecoration(
